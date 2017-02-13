@@ -60,19 +60,7 @@ var Dash = function() {
     ["cherryblossom.gif",
     "lakeautmn.gif",
     "shop.gif",
-    "sleepy.gif"],
-    /* Summer gifs */
-    "summer":
-    [""],
-    /* Fall gifs */
-    "fall":
-    [""],
-    /* Winter gifs */
-    "winter":
-    [""],
-    /* Spring gifs */
-    "spring":
-    [""]
+    "sleepy.gif"]
   }
   
   this.curMode = "landscapes";
@@ -81,7 +69,7 @@ var Dash = function() {
   // controllable via Dat.GUI
   this.showClock = true;
   this.showGreeter = true;
-  this.name = "jendrik";
+  this.name = "pvillaro";
   this.theme = "landscapes"
 
   this.changeBackground = function(background) {
@@ -141,16 +129,20 @@ var Dash = function() {
     this.curIndex = Math.floor(x);
 
     this.updateBackground();
+    alertify.log("Press Left or Right to change background.");
+    alertify.log("Press Up to change mode.");
+
   }
 
   this.changeMode = function(mode) {
-    this.curMode = mode 
-    this.curIndex = 0
+    console.log(mode);
+    this.curMode = mode;
+    this.curIndex = 0;
     this.updateBackground();
 
     this.basil.set("mode2", mode);
     this.basil.set("done-tutorial", true);
-    //alertify.log("Saved settings")
+    alertify.log("Saved settings")
   } 
 }
 
@@ -160,8 +152,8 @@ var updateClock = function() {
     var currentHours = currentTime.getHours ( );
     
     var greeting = ""
-    if((0 <= currentHours) && (currentHours < 6)) {
-      greeting = "Good Night, Pedro"
+    if((3 <= currentHours) && (currentHours < 6)) {
+      greeting = "Sleep Well, Pedro"
     }
     if((6 <= currentHours) && (currentHours < 12)) {
       greeting = "Good Morning, Pedro"
@@ -172,8 +164,8 @@ var updateClock = function() {
     if((18 <= currentHours) && (currentHours < 22)) {
       greeting = "Good Evening, Pedro"
     }
-    if((22 <= currentHours) && (currentHours < 24)) {
-      greeting = "Sleep Well, Pedro"
+    if(((22 <= currentHours) && (currentHours < 24)) || ((0 <= currentHours) && (2 <= currentHours))) {
+      greeting = "Good Night, Pedro"
     }
     
     var currentMinutes = currentTime.getMinutes ( );
@@ -210,6 +202,7 @@ window.onload = function() {
 
   switch(greeting) {
     case "Good Night, Pedro":
+    dash.changeMode
     break;
 
     case "Good Morning, Pedro":
@@ -225,11 +218,6 @@ window.onload = function() {
     break;
   }
 
-  if (greeting == "Good Night, Pedro") {
-
-  }
-
-
   themes.onChange(function(value) {
     dash.changeMode(value);
   })
@@ -240,10 +228,13 @@ window.onload = function() {
 
   /* Binding key strokes */
   Mousetrap.bind("up", function() {
-    if (mode == "other") {
+    if (dash.curMode == "other") {
       dash.changeMode("landscapes");
-    }
-    else {
+    } else if (dash.curMode == "landscapes") {
+      dash.changeMode("mine");
+    } else if (dash.curMode == "mine") {
+      dash.changeMode("chill");
+    } else if (dash.curMode == "chill") {
       dash.changeMode("other");
     }
   });
