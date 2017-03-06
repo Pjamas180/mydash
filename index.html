@@ -1,43 +1,63 @@
 <html>
-<head>
-<title>MyDash</title>
+  <head>
+    <title>MyDash</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
-<style>
-html { 
-  background: no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  font-family: 'minecraftfont';
-  color: #fff;
-}
-</style>
+    <style>
+    html { 
+      background: no-repeat center center fixed; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      font-family: 'minecraftfont';
+      color: #fff;
+    }
+    </style>
 
-<link rel="stylesheet" href="css/8bitdash.css">
-<link rel="stylesheet" href="css/font.css">
-<link rel="stylesheet" href="bower_components/alertifyjs/dist/css/alertify.css">
+    <link rel="stylesheet" href="css/8bitdash.css">
+    <link rel="stylesheet" href="css/font.css">
+    <link rel="stylesheet" href="bower_components/alertifyjs/dist/css/alertify.css">
 
-<script src="bower_components/dat-gui/build/dat.gui.min.js"></script>
-<script src="bower_components/alertifyjs/dist/js/alertify.js"></script>
-<script src="bower_components/mousetrap/mousetrap.min.js"></script>
-<script src="bower_components/basil.js/build/basil.min.js"></script>
-<script src="js/dash.js"></script>
-<script src="js/clock.js"></script>
-<script src="js/bindkeys.js"></script>
-<script src="js/index.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="bower_components/dat-gui/build/dat.gui.min.js"></script>
+    <script src="bower_components/alertifyjs/dist/js/alertify.js"></script>
+    <script src="bower_components/mousetrap/mousetrap.min.js"></script>
+    <script src="bower_components/basil.js/build/basil.min.js"></script>
+    <script src="js/dash.js"></script>
+    <script src="js/clock.js"></script>
+    <script src="js/bindkeys.js"></script>
+    <script src="js/index.js"></script>
 
-</head>
-<body>
-<div id="center">
-  <div id="clock">  
-  </div>
-  <div id="greeting">
-	Loading...
-  </div>
-</div>
-<div id="footer">
-</div>
+  </head>
+  <body>
 
-</body>
+    <div id="weather">
+      Weather
+    </div>
+
+    <script>
+      $("#weather").hover(function(){
+        console.log("Hovering over weather div");
+        $("#notifications").slideToggle();     
+      });
+    </script>
+  
+    <div id="notifications" style="display: none;">
+      Notifications
+    </div>
+  
+
+    <div id="center">
+      <div id="clock">  
+      </div>
+      <div id="greeting">
+    	Loading...
+      </div>
+    </div>
+
+    <div id="footer">
+    </div>
+
+  </body>
 </html>

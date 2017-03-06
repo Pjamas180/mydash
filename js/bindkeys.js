@@ -1,4 +1,4 @@
-var bindKeyStrokes = function() {
+var bindKeyStrokes = function(dash) {
   /* Binding key strokes */
   Mousetrap.bind("up", function() {
     if (dash.curMode == "other") {

@@ -68,7 +68,6 @@ var Dash = function() {
   this.changeBackground = function(background) {
     console.log("Changing to " + background);
     var rule = document.styleSheets[0].cssRules[0];
-    console.log(document.styleSheets[0]);
     var postfix = "no-repeat center center fixed";
     var s = "url(images/" + background + ") " + postfix;
     rule.style.background = s 
