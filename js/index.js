@@ -13,19 +13,19 @@ window.onload = function() {
   var themes = gui.add(dash, "theme", ["landscapes", "other", "mine", "chill"])
 
   switch(greeting) {
-    case "Good Night, Pedro":
+    case "Good Night, Randy":
     break;
 
-    case "Good Morning, Pedro":
+    case "Good Morning, Randy":
     break;
 
-    case "Good Afternoon, Pedro":
+    case "Good Afternoon, Randy":
     break;
 
-    case "Good Evening, Pedro":
+    case "Good Evening, Randy":
     break;
 
-    case "Sleep Well, Pedro":
+    case "Sleep Well, Randy":
     break;
   }
 
@@ -39,51 +39,38 @@ window.onload = function() {
 
   bindKeyStrokes(dash);
 
-  var x = document.getElementById("weather");
-  var lat, lon;
-  function getLocation() {
-      if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-          x.innerHTML = "Geolocation is not supported by this browser.";
-      }
-  }
-  function showPosition(position) {
-    console.log("Latitude: " + position.coords.latitude);
-    console.log("Longitude: " + position.coords.longitude);
-    lat = position.coords.latitude;
-    lon = position.coords.longitude;
-  }
-
-  // getLocation();
-
-  /*
-    https://api.aerisapi.com/forecasts/lat,long
-    YTkXhLgiZhOeuXUVReNGC
-    6sMw2ddx1PjKo76eCLXhWuKDO4IG9inMmWxSYsnD
-  */
-  
   $.ajax({
-    url: "http://api.aerisapi.com/forecasts/los+angeles,ca?client_id=YTkXhLgiZhOeuXUVReNGC&client_secret=6sMw2ddx1PjKo76eCLXhWuKDO4IG9inMmWxSYsnD",
+    url: "https://geoip-db.com/jsonp",
+    jsonpCallback: "callback",
     dataType: "jsonp",
-    success: function(json) {
-      if (json.success == true) {
-        // Set the HTML weather div here.
-        console.log(json.response[0]);
-        var week = json.response[0].periods;
-        // console.log(week[0].weather);
-        $("#weather").html(week[0].weather);
+    success: function( location ) {
+      $('#latitude').html(location.latitude);
+      $('#longitude').html(location.longitude);
+
+    $.ajax({
+      url: "http://api.aerisapi.com/forecasts/" + location.latitude + "," + location.longitude + "?client_id=YTkXhLgiZhOeuXUVReNGC&client_secret=6sMw2ddx1PjKo76eCLXhWuKDO4IG9inMmWxSYsnD",
+      dataType: "jsonp",
+      success: function(json) {
+        if (json.success == true) {
+          // Set the HTML weather div here.
+          console.log(json.response[0]);
+          var week = json.response[0].periods;
+          // console.log(week[0].weather);
+          $("#weather").html(week[0].avgFeelslikeF + "&#176 F:" + week[0].weather);
 
         //var ob = json.response.ob;
         //$('#js').html('The current weather in Seattle is ' + ob.weather.toLowerCase() + ' with a temperature of ' + ob.tempF + '°');
+        }
+        else {
+          alert('An error occurred: ' + json.error.description);
+          // Set the HTML weather div to "Unable to gather weather data"
+        }
       }
-      else {
-        alert('An error occurred: ' + json.error.description);
-        // Set the HTML weather div to "Unable to gather weather data"
-      }
+    });
+
     }
   });
-  
+
 
   // Clear the URL bar.
   window.history.pushState("string","Title","");
