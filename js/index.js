@@ -13,19 +13,19 @@ window.onload = function() {
   var themes = gui.add(dash, "theme", ["landscapes", "other", "mine", "chill"])
 
   switch(greeting) {
-    case "Good Night, Randy":
+    case "Good Night, Pj":
     break;
 
-    case "Good Morning, Randy":
+    case "Good Morning, Pj":
     break;
 
-    case "Good Afternoon, Randy":
+    case "Good Afternoon, Pj":
     break;
 
-    case "Good Evening, Randy":
+    case "Good Evening, Pj":
     break;
 
-    case "Sleep Well, Randy":
+    case "Sleep Well, Pj":
     break;
   }
 
