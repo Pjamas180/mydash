@@ -27,43 +27,48 @@ var Dash = function() {
     "cyber.gif": "http://flexroman.tumblr.com/"
   }
 
-  var modes = {"landscapes": 
-    ["bridge.gif",
-     "coast.gif",
-     "dawn.gif", 
-     "grandcanyon.gif",
-     "northlights.gif",
-     "lake.gif",
-     "falls.gif", 
-     "castle.gif",
-     "bridge_raining.gif",
-     "snow.gif", 
-     "nature.gif",
-     "sea.gif",
-     "temple.gif",
-     "forrest.gif",
-     "waterfall.gif"],
-     "other": 
-    ["builder_by_kirokaze-dattci7.gif",
-     "fishing_by_kirokaze-d9ut42f.gif",
-     "training_by_kirokaze-d9g32f4.gif"],
-    "mine":
-    ["fire.gif"],
-    "chill":
-    ["cherryblossom.gif",
-    "lakeautmn.gif",
-    "shop.gif",
-    "sleepy.gif"]
+  var modes = {"sleepwell": 
+    ["Sleep.jpg"],
+     "goodmorning": 
+    ["Morning.jpg"],
+    "goodafternoon":
+    ["Afternoon1.jpg"],
+    "goodevening":
+    ["Evening1.png",
+    "Evening.png"], 
+    "goodnight":
+    ["Night.jpg"]
   }
   
-  this.curMode = "landscapes";
+  this.curMode = "goodmorning";
   this.curIndex = 0;
 
   // controllable via Dat.GUI
   this.showClock = true;
   this.showGreeter = true;
   this.name = "pvillaro";
-  this.theme = "landscapes"
+  this.theme = "goodmorning"
+
+  var currentTime = new Date();
+  
+  var currentHours = currentTime.getHours ();
+
+    if((3 <= currentHours) && (currentHours < 6)) {
+      this.curMode = "sleepwell"
+    }
+    if((6 <= currentHours) && (currentHours < 12)) {
+      this.curMode = "goodmorning"
+    }
+    if((12 <= currentHours) && (currentHours < 18)) {
+      this.curMode = "goodafternoon"
+    }
+    if((18 <= currentHours) && (currentHours < 22)) {
+      this.curMode = "goodevening" 
+    }
+    if(((22 <= currentHours) && (currentHours < 24)) || ((0 <= currentHours) && (currentHours <= 2))) {
+      this.curMode = "goodnight"
+    }
+    console.log(this.curMode);
 
   this.changeBackground = function(background) {
     console.log("Changing to " + background);
@@ -112,10 +117,10 @@ var Dash = function() {
     this.basil = basil;
     
     var keys = basil.keys()
-    if(keys.indexOf("mode2") != -1) {
+    /*if(keys.indexOf("mode2") != -1) {
       this.curMode = basil.get("mode2");
       console.log("loaded mode from saved settings")
-    }
+    }*/
 
     // random background
     var x = Math.random() * modes[this.curMode].length;
