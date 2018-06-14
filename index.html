@@ -12,6 +12,7 @@
       background-size: cover;
       font-family: 'minecraftfont';
       color: #fff;
+
     }
     </style>
 
@@ -19,6 +20,7 @@
     <link rel="stylesheet" href="css/font.css">
     <link rel="stylesheet" href="bower_components/alertifyjs/dist/css/alertify.css">
 
+    
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="bower_components/dat-gui/build/dat.gui.min.js"></script>
     <script src="bower_components/alertifyjs/dist/js/alertify.js"></script>
@@ -32,21 +34,57 @@
   </head>
   <body>
 
-    <div id="weather">
-      Weather
+    
+
+    <div id="weatherContainer">
+      <div id="circle1">     </div>
+      <button id="play" onclick="playAudio()" type="button">&#9654;</button>
+      <button id="pause" onclick="pauseAudio()" type="button">II</button>
+
+      <div id="weathericon"></div>
+
+      <div id="weather">
+        <font size="2">
+        Weather
+        </font>
+      </div>
+
+
+      <div id="circle2">    </div>
     </div>
 
+
+
+    <audio id="myAudio">
+      <source src="//C:\\Users\\randy\\dev\\proj\\mydash\\music\\atcafe.mp3" type="audio/mpeg">
+  
+    </audio>
+
+    <script>
+      var x = document.getElementById("myAudio"); 
+
+      function playAudio() { 
+      x.play(); 
+      } 
+
+      function pauseAudio() { 
+      x.pause(); 
+      } 
+      </script>
+
+
+<!--
     <script>
       $("#weather").hover(function(){
         console.log("Hovering over weather div");
-        // $("#notifications").slideToggle();     
+        $("#notifications").slideToggle();     
       });
     </script>
   
     <div id="notifications" style="display: none;">
       Notifications
     </div>
-  
+  -->
 
     <div id="center">
       <div id="clock">  

@@ -10,30 +10,103 @@
 
 #notifications {
   position: fixed;
-  width: 200px;
+  width: 175px;
   height: 30px;
-  top: 45px;
+  top: 92px;
   background: rgba(0,0,0,0.4);
   border-radius: 5px;
   text-align: center;
+  padding-top:8px;
+}
+
+#weatherContainer {
+	background: rgba(0,0,0,0);
+	height: 97%;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	text-align:center;
+justify-content: center;
+}
+
+#weathericon {
+  min-width:60px;
+  height:50px;
+padding-top:10px;
+  background: white;
+  border-radius: 30px;
+  text-align: center;
+  box-shadow: 0px 0px 30px black;
+opacity: 0.9;
+padding-left:0px;
+
+
+
 }
 
 #weather {
-  position: fixed;
-  width:200px;
-  min-height:30px;
-  background: rgba(0,0,0,0.4);
+  height:24px;
+min-width: 150;
+max-width: 150;
+  background: none;
   border-radius: 5px;
   text-align: center;
-  padding-bottom:5px;
-  padding-top:5px;
+  padding-top:6px;
+  color: rgba(255,255,255,1);
+margin-bottom:15px;
+text-shadow: 0px 0px 5px black;
 }
+
+#circle1 {
+  background: white;
+  min-width: 24px;  
+  height: 24px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 15px black;
+  margin-bottom:18px;
+opacity: 0.5;
+}
+#circle2 {
+  background: white;
+  min-width: 24px;  
+  height: 24px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 15px black;
+  margin-bottom:18px;
+opacity: 0.5;
+}
+
+#play {
+background: none;
+width: 30px;
+height: 30px;
+border:none;
+color: rgba(255,255,255,1);
+padding-bottom:3px;
+margin-bottom:15px;
+margin-left:30px;
+margin-right:30px;
+text-shadow: 0px 0px 5px black;
+}
+
+#pause {
+margin-right:30px;
+background: none;
+width: 30px;
+height: 30px;
+margin-bottom:15px;
+border:none;
+color: rgba(255,255,255,1);
+text-shadow: 0px 0px 5px black;
+font-family: "Arial Black"
+}
+
 
 #center {
   width: 400px;
   height: 120px;
   position: absolute;
-  top:-50px;
+  top:0px;
   bottom: 0;
   left: 0;
   right: 0;
@@ -43,10 +116,10 @@
 
 #clock {
   font-size: 4em;
-  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  text-shadow: -2px 0 7px rgba(50,50,50,.8), 0 2px 7px rgba(50,50,50,.8), 2px 0 7px rgba(50,50,50,.8), 0 -2px 7px rgba(50,50,50,.8);
 
 }
 
 #greeting {
-  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+  text-shadow: -2px 0 7px rgba(50,50,50,.8), 0 2px 7px rgba(50,50,50,.8), 2px 0 7px rgba(50,50,50,.8), 0 -2px 7px rgba(50,50,50,.8);
 }

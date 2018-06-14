@@ -10,7 +10,7 @@ window.onload = function() {
   updateClock();
   setInterval('updateClock()', 10000 )
 
-  var themes = gui.add(dash, "theme", ["landscapes", "other", "mine", "chill"])
+  var themes = gui.add(dash, "theme", ["sleepwell", "goodmorning", "goodafternoon", "goodevening", "goodnight"])
 
   switch(greeting) {
     case "Good Night, Pj":
@@ -33,9 +33,9 @@ window.onload = function() {
     dash.changeMode(value);
   })
 
-  if(basil.keys().indexOf('done-tutorial') == -1) {
+  /*if(basil.keys().indexOf('done-tutorial') == -1) {
     alertify.log("Press H for settings");
-  }
+  }*/
 
   bindKeyStrokes(dash);
 
@@ -44,27 +44,33 @@ window.onload = function() {
     jsonpCallback: "callback",
     dataType: "jsonp",
     success: function( location ) {
-      $('#latitude').html(location.latitude);
-      $('#longitude').html(location.longitude);
+      $('#postal').html(location.postal);
+      $('#countrycode').html(location.country_code);
+      console.log(location.postal);
+      console.log(location.country_code);
+
 
     $.ajax({
-      url: "http://api.aerisapi.com/forecasts/" + location.latitude + "," + location.longitude + "?client_id=YTkXhLgiZhOeuXUVReNGC&client_secret=6sMw2ddx1PjKo76eCLXhWuKDO4IG9inMmWxSYsnD",
+      url: "http://api.openweathermap.org/data/2.5/weather?zip=" + location.postal + "," + location.country_code + "&APPID=37f1412bbf06612025ba6c6948dc13cd",
       dataType: "jsonp",
       success: function(json) {
-        if (json.success == true) {
+        
           // Set the HTML weather div here.
-          console.log(json.response[0]);
-          var week = json.response[0].periods;
-          // console.log(week[0].weather);
-          $("#weather").html(week[0].avgFeelslikeF + "&#176 F:" + week[0].weather);
+          console.log(json.coord);
+          console.log(json.main);
+          console.log(json.weather[0].main);
+          console.log(json.weather[0].icon);
+          var kelvin = json.main.temp;
+          var weather = json.weather[0].main;
+          var fahrenheit= Math.round(9 / 5 * (kelvin - 273) + 32);
+          $("#weather").html('<font size="2">' + fahrenheit + "&#176 F: " + weather + '</font>');
+          $('#weathericon').prepend('<img src="//C:\\Users\\randy\\dev\\proj\\mydash\\weathericon\\' + json.weather[0].icon + '.png" width="40" height="40" class=center/>');
+          //C:\\Users\\randy\\dev\\proj\\mydash\\weathericon\\' + json.weather[0].icon + '
+          //http://openweathermap.org/img/w/' + json.weather[0].icon + '
 
         //var ob = json.response.ob;
         //$('#js').html('The current weather in Seattle is ' + ob.weather.toLowerCase() + ' with a temperature of ' + ob.tempF + '°');
-        }
-        else {
-          alert('An error occurred: ' + json.error.description);
-          // Set the HTML weather div to "Unable to gather weather data"
-        }
+        
       }
     });
 
