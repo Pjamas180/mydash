@@ -1,23 +1,23 @@
-var updateClock = function() {
+var updateClock = function(name) {
     var currentTime = new Date();
   
     var currentHours = currentTime.getHours ( );
     
     var greeting = ""
     if((3 <= currentHours) && (currentHours < 6)) {
-      greeting = "Sleep Well, Randy"
+      greeting = "Sleep Well, " + name
     }
     if((6 <= currentHours) && (currentHours < 12)) {
-      greeting = "Good Morning, Randy"
+      greeting = "Good Morning, " + name
     }
     if((12 <= currentHours) && (currentHours < 18)) {
-      greeting = "Good Afternoon, Randy"
+      greeting = "Good Afternoon, " + name
     }
     if((18 <= currentHours) && (currentHours < 22)) {
-      greeting = "Good Evening, Randy"
+      greeting = "Good Evening, " + name
     }
     if(((22 <= currentHours) && (currentHours < 24)) || ((0 <= currentHours) && (currentHours <= 2))) {
-      greeting = "Good Night, Randy"
+      greeting = "Good Night, " + name
     }
     var currentMinutes = currentTime.getMinutes ( );
     var currentSeconds = currentTime.getSeconds ( );

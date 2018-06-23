@@ -7,27 +7,10 @@ window.onload = function() {
   var gui = new dat.GUI();
   dat.GUI.toggleHide();
 
-  updateClock();
-  setInterval('updateClock()', 10000 )
+  updateClock(dashOptions.name);
+  setInterval(updateClock(dashOptions.name), 10000 )
 
   var themes = gui.add(dash, "theme", ["sleepwell", "goodmorning", "goodafternoon", "goodevening", "goodnight"])
-
-  switch(greeting) {
-    case "Good Night, Pj":
-    break;
-
-    case "Good Morning, Pj":
-    break;
-
-    case "Good Afternoon, Pj":
-    break;
-
-    case "Good Evening, Pj":
-    break;
-
-    case "Sleep Well, Pj":
-    break;
-  }
 
   themes.onChange(function(value) {
     dash.changeMode(value);
@@ -64,12 +47,7 @@ window.onload = function() {
           var weather = json.weather[0].main;
           var fahrenheit= Math.round(9 / 5 * (kelvin - 273) + 32);
           $("#weather").html('<font size="2">' + fahrenheit + "&#176 F: " + weather + '</font>');
-          $('#weathericon').prepend('<img src="//C:\\Users\\randy\\dev\\proj\\mydash\\weathericon\\' + json.weather[0].icon + '.png" width="40" height="40" class=center/>');
-          //C:\\Users\\randy\\dev\\proj\\mydash\\weathericon\\' + json.weather[0].icon + '
-          //http://openweathermap.org/img/w/' + json.weather[0].icon + '
-
-        //var ob = json.response.ob;
-        //$('#js').html('The current weather in Seattle is ' + ob.weather.toLowerCase() + ' with a temperature of ' + ob.tempF + '°');
+          $('#weathericon').html('<img src="' + dashOptions.weatherIconFolder + json.weather[0].icon + '.png" width="40" height="40" class=center/>');
         
       }
     });
