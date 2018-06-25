@@ -1,16 +1,18 @@
 window.onload = function() {
   var dash = new Dash()
   var basil = new window.Basil();
-  var greeting = document.getElementById("greeting").firstChild.nodeValue; 
+  var greeting = document.getElementById("greeting").firstChild.nodeValue;
 
-  dash.initialize(basil) 
+  dash.initialize(basil)
   var gui = new dat.GUI();
   dat.GUI.toggleHide();
 
   updateClock(dashOptions.name);
   setInterval(updateClock(dashOptions.name), 10000 )
 
-  var themes = gui.add(dash, "theme", ["sleepwell", "goodmorning", "goodafternoon", "goodevening", "goodnight"])
+  var themes = gui.add(dash, "theme", ["sleepwell", "goodmorning",
+                                       "goodafternoon", "goodevening",
+                                       "goodnight"])
 
   themes.onChange(function(value) {
     dash.changeMode(value);
@@ -34,10 +36,11 @@ window.onload = function() {
 
 
     $.ajax({
-      url: "http://api.openweathermap.org/data/2.5/weather?zip=" + location.postal + "," + location.country_code + "&APPID=37f1412bbf06612025ba6c6948dc13cd",
+      url: "http://api.openweathermap.org/data/2.5/weather?zip=" +
+            location.postal + "," + location.country_code +
+           "&APPID=37f1412bbf06612025ba6c6948dc13cd",
       dataType: "jsonp",
       success: function(json) {
-        
           // Set the HTML weather div here.
           console.log(json.coord);
           console.log(json.main);
@@ -46,9 +49,11 @@ window.onload = function() {
           var kelvin = json.main.temp;
           var weather = json.weather[0].main;
           var fahrenheit= Math.round(9 / 5 * (kelvin - 273) + 32);
-          $("#weather").html('<font size="2">' + fahrenheit + "&#176 F: " + weather + '</font>');
-          $('#weathericon').html('<img src="' + dashOptions.weatherIconFolder + json.weather[0].icon + '.png" width="40" height="40" class=center/>');
-        
+          $("#weather").html('<font size="2">' + fahrenheit + "&#176 F: " +
+                              weather + '</font>');
+          var weatherIcon = 'weathericon/' + json.weather[0].icon;
+          $('#weathericon').html('<img src="' + weatherIcon + '.png"' +
+                                 ' width="40" height="40" class=center/>');
       }
     });
 
@@ -60,4 +65,3 @@ window.onload = function() {
   window.history.pushState("string","Title","");
 
 }
-
